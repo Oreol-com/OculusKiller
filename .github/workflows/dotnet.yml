@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: OculusKiller
-        path: OculusKiller\OculusKiller\OculusKiller\bin\x64\Release\OculusDash.exe
+        path: D:\a\OculusKiller\OculusKiller\OculusKiller\bin\x64\Release\OculusDash.exe
 
     - name: Download Artifact
       uses: actions/download-artifact@v2
