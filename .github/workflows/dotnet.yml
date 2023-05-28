@@ -35,11 +35,21 @@ jobs:
         name: OculusKiller
         path: D:\a\OculusKiller\OculusKiller\OculusKiller\bin\x64\Release\OculusDash.exe
 
-    - name: Download Artifact
-      uses: actions/download-artifact@v2
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_NAME: Release $(date +%F)
+        RELEASE_TAGS: $(date +%F)
+
+    - name: Upload Artifact to Release
+      uses: actions/upload-release-asset@v2
       with:
-        name: OculusKiller
-        path: ./downloaded-artifacts
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./downloaded-artifacts/OculusKiller/OculusKiller/bin/x64/Release/OculusDash.exe
+        asset_name: OculusKiller
+        asset_content_type: application/x-msdownload
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
