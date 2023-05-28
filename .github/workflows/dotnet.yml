@@ -29,5 +29,20 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
 
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --output ./OculusKiller.1.0.0/
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: OculusKiller
+        path: ./OculusKiller.1.0.0/
+
+    - name: Download Artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: OculusKiller
+        path: ./downloaded-artifacts
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
